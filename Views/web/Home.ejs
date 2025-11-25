@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* General Body */
+    body {
+      background: #f8f9fa;
+      font-family: Arial, sans-serif;
+      color: #343a40;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: #ffffff !important;
+      border-bottom: 1px solid #eaeaea;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.4rem;
+      color: #7460ee !important;
+    }
+
+    .navbar-nav .nav-link {
+      font-weight: 500;
+      color: #495057 !important;
+      transition: color 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #7460ee !important;
+    }
+
+    .navbar .btn {
+      background-color: #7460ee !important;
+      color: #fff !important;
+      border-radius: 25px;
+      padding: 6px 16px;
+      font-weight: 500;
+    }
+
+    .navbar .btn:hover {
+      background-color: #5b47d0 !important;
+    }
+
+    /* Page Title */
+    .blog-title {
+      margin: 0 0 30px 0;
+      font-weight: bold;
+      font-size: 2rem;
+      text-align: center;
+      color: #fff;
+      background-color: #7460ee;
+      padding: 30px 0;
+      border-radius: 6px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Blog Cards */
+    .card {
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      border: none;
+      background: #fff;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.12);
+    }
+
+    .card img {
+      height: 200px;
+      object-fit: contain;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .card h6 {
+      font-size: 0.85rem;
+      color: #6c757d;
+    }
+
+    .card p {
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+    }
+
+    /* Buttons inside Cards */
+    .card .btn {
+      background: #7460ee !important;
+      border: none;
+      border-radius: 25px;
+      padding: 6px 14px;
+      font-size: 0.85rem;
+      color: #fff !important;
+    }
+
+    .card .btn:hover {
+      background: #5b47d0 !important;
+    }
+
+    /* Responsive Tweaks */
+    @media (max-width: 768px) {
+      .blog-title {
+        font-size: 1.6rem;
+        padding: 20px 0;
+      }
+
+      .card img {
+        height: 160px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/web/login">Website</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-3">
+          <li class="nav-item"><a class="nav-link" href="/web">Home</a></li>
+          <li class="nav-item"><a class="nav-link active fw-bold" href="/web">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="/web/product">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="/web/contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="/web/login">Login</a></li>
+          <li class="nav-item">
+            <a href="/web/register" class="btn">Register</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Blog Section -->
+  <div class="blog">
+    <h2 class="blog-title">Blogs</h2>
+    <div class="container mt-5">
+      <div class="row">
+        <% if (blogs.length === 0) { %>
+          <div class="col-12 text-center py-5">
+            <h5 class="text-muted">No blogs found. Start writing one!</h5>
+          </div>
+        <% } %>
+
+        <% blogs.forEach(blog => { %>
+          <div class="col-md-3 mb-4">
+            <div class="card h-100 shadow-sm position-relative">
+              <!-- Blog Image -->
+              <img src="<%= blog.image %>" class="card-img-top" alt="<%= blog.title %>">
+
+              <div class="card-body">
+                <h5 class="card-title"><%= blog.title %></h5>
+                <h6>By: <%= blog.author %></h6>
+                <p class="text-muted">Category: <%= blog.category %></p>
+                <p class="text-muted">Date: <%= new Date(blog.createdAt).toLocaleDateString() %></p>
+              </div>
+
+              <div class="card-footer bg-white border-0 d-flex justify-content-center">
+                <a href="/web/singleblog/<%= blog._id %>" class="btn btn-sm">Read More</a>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/yourkitid.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

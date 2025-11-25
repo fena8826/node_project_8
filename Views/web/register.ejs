@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - Myntra</title>
+ 
+</head>
+ <style>
+ 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f8f8f8;
+      color: #333;
+    }
+
+    .signup-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .signup-box {
+      background-color: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+  
+    .logo img {
+      display: block;
+      margin: 0 auto 30px;
+      width: 160px;
+    }
+    
+    h2 {
+      text-align: center;
+      font-size: 28px;
+      color: #333;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+   
+    .input-group {
+      margin-bottom: 20px;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      transition: border 0.3s;
+    }
+    .input-group input:focus {
+      border-color: #2874f0;
+      outline: none;
+    }
+
+    button.btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background-color: #2874f0;
+      color: white;
+      font-size: 16px;
+      text-align: center;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button.btn:hover {
+      background-color: #1c5bb2;
+    }
+
+    .links {
+      margin-top: 15px;
+      text-align: center;
+    }
+    .links a {
+      color: #2874f0;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .links a:hover {
+      text-decoration: underline;
+    }
+
+    .form-group input[type="file"] {
+      padding: 6px;
+      border: 1px solid #ccc;
+      width: 100%;
+    }
+
+    .form-group input[type="file"]:focus {
+      border-color: #2874f0;
+    }
+
+    @media (max-width: 768px) {
+      .signup-box {
+        padding: 20px;
+        max-width: 90%;
+      }
+    }
+  </style>
+<body>
+
+  <div class="signup-container">
+    <div class="signup-box">
+      <div class="logo">
+        <img src="https://1000logos.net/wp-content/uploads/2022/08/Myntra-Logo.png" alt="Myntra Logo" width="150">
+      </div>
+      <h2>Create Account</h2>
+      <form action="/web/register" method="POST">
+       <div class="input-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter password" required>
+                </div>
+                <div class="input-group">
+                    <label for="cpassword">Confirm Password</label>
+                    <input type="password" id="cpassword" name="cpassword" placeholder="Confirm password" required>
+                </div>
+                <button type="submit" class="btn">Register</button>
+                <div class="links">
+                    <p><a href="/web/login">Already have an account? Login here</a></p>
+    
+                </div>
+            
+      </form>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Catalog - Dark Theme</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+   body {
+            background-color: #f8f8f8;
+            font-family: 'Segoe UI', sans-serif;
+        }
+  /* Navbar */
+ .navbar-brand {
+            font-weight: bold;
+            color: #ff3f6c;
+            font-size: 2rem;
+        }
+
+        .nav-link {
+            color: #000 !important;
+            font-weight: 600;
+            margin-right: 20px;
+        }
+
+        .search-bar input {
+            width: 350px;
+            border-radius: 25px;
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+        }
+
+        .btn-outline-secondary {
+            border-radius: 25px;
+        }
+
+        .profile-section button {
+            border-radius: 20px;
+        }
+
+        .dropdown-toggle::after {
+            margin-left: 8px;
+        }
+
+  /* Carousel */
+  .carousel-inner img {
+    height: 450px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+  .carousel-caption {
+    background: rgba(0,0,0,0.6);
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  /* Category Buttons */
+  .btn-category {
+    border-radius: 30px;
+    padding: 8px 20px;
+    margin: 5px 3px;
+    font-weight: 500;
+    transition: all 0.3s;
+  }
+  .btn-category:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  }
+
+  /* Product Cards */
+ .product-card {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 380px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  background: #fff;
+}
+
+.product-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.product-card:hover {
+  transform: scale(1.03);
+}
+
+.product-info {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 12px;
+}
+
+.product-info .product-name {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 5px;
+  color: #000;
+}
+
+.product-info .product-price {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #ff3f6c;
+  margin-bottom: 5px;
+}
+
+.product-info .product-category {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+   @media (max-width: 768px) {
+            .search-bar input {
+                width: 100%;
+            }
+
+            .card-img-top {
+                height: 200px;
+            }
+
+            .profile-section {
+                flex-direction: column;
+                align-items: start;
+                gap: 10px;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background-color: #fff;
+            border-top: 1px solid #ccc;
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: #000;
+        }
+
+        footer h6 {
+            font-weight: bold;
+        }
+        #myntraBannerCarousel {
+    margin-bottom: 30px;
+    
+}
+
+.carousel-item img {
+    height: 500px;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+@media (max-width: 768px) {
+    .carousel-item img {
+        height: 250px;
+    }
+}
+
+
+</style>
+</head>
+<body>
+
+<header class="bg-white shadow-sm sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-light container py-2">
+            <a class="navbar-brand" href="/web/product">
+                <img src="https://i.pinimg.com/736x/68/6d/c5/686dc532a1d5ba6a70057b87815eb929.jpg"  alt="logo" height="50" width="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#">Men</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Women</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Kids</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Beauty</a></li>
+                </ul>
+               <form class="d-flex search-bar" method="GET" action="/web/product">
+    <input type="text" name="search" class="form-control me-2" placeholder="Search for products, brands and more" value="<%= typeof search !== 'undefined' ? search : '' %>">
+    <button class="btn btn-outline-secondary" type="submit">
+        <i class="bi bi-search"></i>
+    </button>
+</form>
+                    <div class="profile-section d-flex align-items-center gap-3">
+                    <% if (!locals.user) { %>
+                        <a href="/web/login">
+                            <button class="btn btn-outline-dark">Login</button>
+                        </a>
+                    <% } else { %>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-dark dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown">
+                               <%= user.firstname %> <%= user.lastname %>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">👤 Profile</a></li>
+                                <li><a class="dropdown-item" href="#">🔐 Change Password</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="/web/logout">🚪 Logout</a></li>
+                            </ul>
+                        </div>
+                    <% } %>
+                    <a href="#"><button class="btn btn-outline-dark"><i class="bi bi-heart"></i></button></a>
+                    <a href="#"><button class="btn btn-outline-dark"><i class="bi bi-bag"></i></button></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+<div id="myntraBannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+
+    <div class="carousel-inner">
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+            <img src="https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2025/SEPTEMBER/18/sxWlnSUJ_2c29909c6eaa4ed480950b07038dddd7.jpg" class="d-block w-100" alt="Banner 1">
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+            <img src="https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2025/AUGUST/25/0pfZkpSF_60a17fdbda0a4622b8bd1f79585836c0.png" class="d-block w-100" alt="Banner 2">
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-item">
+            <img src="https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2022/7/25/179e278f-77ee-44c2-bf39-9f00b0cd08e01658752429301-Handbags_Desk.jpg" class="d-block w-100" alt="Banner 3">
+        </div>
+        <!-- Slide 4 -->
+        <div class="carousel-item">
+            <img src="https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2022/7/25/9be788ff-39a4-4214-99d0-fc97505aae5a1658752545685-USPA_Desk_Banner.jpg" class="d-block w-100" alt="Banner 4">
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#myntraBannerCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#myntraBannerCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+<div class="container">
+  <!-- Categories -->
+ 
+
+
+   <div class="container my-4 text-center category-buttons">
+        <a class="btn btn-dark" href="/web/product">All</a>
+        <% categories.forEach((category) => { %>
+            <a class="btn btn-dark" href="/web/product?category=<%= category._id %>">
+                <%= category.category %>
+            </a>
+        <% }); %>
+    </div>
+  
+
+   <div class="container">
+        <div class="row">
+            <% allProducts.forEach((product) => { %>
+                <div class="col-md-3 mb-4">
+  <a href="/web/single-product/<%= product._id %>" class="text-decoration-none">
+    <div class="product-card">
+      <img src="<%= product.productImage %>" alt="<%= product.title %>">
+
+      <div class="product-info">
+        <h6 class="product-name"><%= product.title %></h6>
+        <p class="product-price">₹ <%= product.price %></p>
+        <p class="product-category">
+          <%= product.category && product.category.category ? product.category.category : 'Uncategorized' %>
+        </p>
+      </div>
+    </div>
+  </a>
+</div>
+
+
+            <% }); %>
+        </div>
+    </div>
+</div>
+
+<footer class="pt-4 pb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h6>Online Shopping</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Men</a></li>
+                        <li><a href="#">Women</a></li>
+                        <li><a href="#">Kids</a></li>
+                        <li><a href="#">Beauty</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>Useful Links</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">T&C</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>Get the App</h6>
+                    <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png" height="40"></a><br>
+                    <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/2560px-Download_on_the_App_Store_Badge.svg.png" height="40"></a>
+                </div>
+                <div class="col-md-3">
+                    <h6>Keep in Touch</h6>
+                    <p>Email: support@myntra.com</p>
+                    <p>Phone: +91 98765 43210</p>
+                    <div class="d-flex gap-3">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4" style="font-size: 14px;">
+                © 2025 Myntra Clone. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+</html>
+
+
+
+
+
+
+    
+
+   
